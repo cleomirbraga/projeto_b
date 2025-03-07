@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 # Carregamento da base
 df_total = pd.read_csv("df_total.csv")
 
+# Open Wide
 st.set_page_config(layout="wide")
 
 # Layout com colunas
@@ -121,13 +122,13 @@ col8, col9, col10 = st.columns([1, 0.05, 1])
 
 with col8:
     # Cálculo
-    digital = df_total[df_total["PRODUTO"] == "RECARGA_DIGITAL"]["ID_PESSOA"].nunique()
-    pre_pago = df_total[df_total["PRODUTO"] == "VALE_PRE_PAGO"]["ID_PESSOA"].nunique()
-    digital_e_pre_pago = df_total[df_total["PRODUTO"].isin(["RECARGA_DIGITAL", "VALE_PRE_PAGO"])].groupby("ID_PESSOA")["PRODUTO"].nunique()
+    digital = df_total[df_total["PRODUTO"] == "PRODUTO_B"]["ID_PESSOA"].nunique()
+    pre_pago = df_total[df_total["PRODUTO"] == "PRODUTO_A"]["ID_PESSOA"].nunique()
+    digital_e_pre_pago = df_total[df_total["PRODUTO"].isin(["PRODUTO_B", "PRODUTO_A"])].groupby("ID_PESSOA")["PRODUTO"].nunique()
     digital_e_pre_pago = digital_e_pre_pago[digital_e_pre_pago > 1].count()
 
     # Dados para o gráfico
-    produtos = ["Usam Recarga Digital", "Usam Vale Pré-Pago", "Ambos"]
+    produtos = ["Usam PRODUTO_B", "Usam PRODUTO_A", "Ambos"]
     quantidades = [digital, pre_pago, digital_e_pre_pago]
     cores = ["#DD3836", "#2091CB", "#CDCDCD"]
     
@@ -146,8 +147,8 @@ with col8:
         labels={"Quantidade": "Número de Clientes", "Produto": "Tipo de Produto"},
         color="Produto",  # Define as cores com base na coluna Produto
         color_discrete_map={
-            "Usam Recarga Digital": "#DD3836",  
-            "Usam Vale Pré-Pago": "#2091CB",   
+            "Usam PRODUTO_B": "#DD3836",  
+            "Usam PRODUTO_A": "#2091CB",   
             "Ambos": "#CDCDCD",               
         },
         text_auto=True,
@@ -163,12 +164,12 @@ with col9:
 
 with col10:
   # Cálculo
-  somente_digital = df_total[~df_total["ID_PESSOA"].isin(df_total[df_total["PRODUTO"] == "VALE_PRE_PAGO"]["ID_PESSOA"])]["ID_PESSOA"].nunique()
-  somente_pre = df_total[~df_total["ID_PESSOA"].isin(df_total[df_total["PRODUTO"] == "RECARGA_DIGITAL"]["ID_PESSOA"])]["ID_PESSOA"].nunique()
+  somente_digital = df_total[~df_total["ID_PESSOA"].isin(df_total[df_total["PRODUTO"] == "PRODUTO_A"]["ID_PESSOA"])]["ID_PESSOA"].nunique()
+  somente_pre = df_total[~df_total["ID_PESSOA"].isin(df_total[df_total["PRODUTO"] == "PRODUTO_B"]["ID_PESSOA"])]["ID_PESSOA"].nunique()
 
   # Dados para o gráfico
   dados = {
-      "Produto": ["Recarga Digital", "Vale Pré-Pago"],
+      "Produto": ["PRODUTO_B", "PRODUTO_A"],
       "Quantidade": [somente_digital, somente_pre]
   } 
   df_grafico = pd.DataFrame(dados)
