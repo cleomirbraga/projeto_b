@@ -247,4 +247,4 @@ with col13:
 st.markdown("---")
 
 # Rodapé
-st.markdown("<p style='text-align: center; color: grey;'>Dashboard criado com Streamlit por Cleomir Braga | Dados: Bemol</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: grey;'>Dashboard criado com Streamlit por Cleomir Braga, unsafe_allow_html=True)
