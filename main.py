@@ -7,12 +7,14 @@ import matplotlib.pyplot as plt
 # Carregamento da base
 df_total = pd.read_csv("df_total.csv")
 
+st.set_page_config(layout="wide")
+
 # Layout com colunas
 col1, col2 = st.columns([1, 2])  # A largura da coluna da imagem é menor que a do conteúdo
 
 with col1:
     # Logo Bemol
-    st.image("Bemol.logo.png", width=300)
+    st.image("logo.jpg", width=300)
 
 with col2:
     # Título
